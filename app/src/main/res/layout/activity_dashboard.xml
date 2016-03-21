@@ -34,15 +34,9 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-        <include layout="@layout/fragment_dashboard"></include>
+
     </android.support.v4.view.ViewPager>
 
-    <android.support.v4.view.ViewPager
-
-        android:id="@+id/contact"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 
