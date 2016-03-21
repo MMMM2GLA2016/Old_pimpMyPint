@@ -1,7 +1,5 @@
 package gla.istic.pimpmypint;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -18,7 +16,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class Dashboard extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -47,7 +45,7 @@ public class Dashboard extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.mybeers);
+        mViewPager = (ViewPager) findViewById(R.id.dashboard);
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -114,9 +112,28 @@ public class Dashboard extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            View rootView=new View(getContext());
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)){
+                case 1:rootView=onCreatePageViewwMyBeers(inflater, container);break;
+                case 2:rootView=onCreatePageViewContact(inflater,  container);break;
+            }
+
+
+
+            return rootView;
+        }
+
+        private View onCreatePageViewContact(LayoutInflater inflater, ViewGroup container) {
+            View rootView = inflater.inflate(R.layout.fragment_contact, container, false);
+
+            return rootView;
+
+        }
+
+        private View onCreatePageViewwMyBeers(LayoutInflater inflater, ViewGroup container) {
+            View rootView = inflater.inflate(R.layout.fragment_mybeers, container, false);
+
             return rootView;
         }
     }
@@ -141,18 +158,17 @@ public class Dashboard extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "My beers";
                 case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
+                    return "My friends";
+
             }
             return null;
         }
